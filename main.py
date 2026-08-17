@@ -31,7 +31,7 @@ def obtener_facturas() -> list[Factura]:
     respuesta = cursor.execute("SELECT id, numero_factura, fecha, cliente, total FROM facturas ORDER BY fecha DESC")
     data= respuesta.fetchall()
     conexion.close()
-    return [dict(factura) for factura in respuesta]
+    return [dict(factura) for factura in data]
 
 # Endpoint 2
 # GET /facturas/{id}
