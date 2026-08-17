@@ -5,10 +5,17 @@ import sqlite3
 app = FastAPI()
 
 class Factura(BaseModel):
+    id: int
     numero_factura: int
     fecha: str
     cliente: str
     total: int
+
+class FacturaCreate(BaseModel):
+    numero_factura: int
+    fecha: str
+    cliente: str
+    total: int    
 
 @app.get("/")
 async def root():
@@ -38,7 +45,7 @@ def obtener_factura(id: int):
 # Endpoint 3
 # POST /facturas
 @app.post("/facturas")
-def crear_factura(factura: Factura):
+def crear_factura(factura: FacturaCreate):
     conexion =  sqlite3.connect("master.db")
 
     cursor = conexion.cursor()
