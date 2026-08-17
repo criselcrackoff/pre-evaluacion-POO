@@ -28,10 +28,10 @@ def obtener_facturas() -> list[Factura]:
     conexion = sqlite3.connect("master.db")
     conexion.row_factory = sqlite3.Row
     cursor = conexion.cursor()
-    respuesta = cursor.execute("SELECT * FROM facturas")
+    respuesta = cursor.execute("SELECT id, numero_factura, fecha, cliente, total FROM facturas ORDER BY fecha DESC")
     data= respuesta.fetchall()
     conexion.close()
-    return [dict(factura) for factura in data]
+    return [dict(factura) for factura in respuesta]
 
 # Endpoint 2
 # GET /facturas/{id}
